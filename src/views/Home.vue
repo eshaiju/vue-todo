@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <AddTodo v-on:add-todo="addTodo"/>
-    <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo"/>
+    <AddTodo />
+    <Todos v-bind:todos="allTodos" v-on:del-todo="this.deleteTodo"/>
   </div>
 </template>
 
@@ -23,24 +23,12 @@ export default {
       todos: []
     }
   },
-  computed: mapGetters(["allTodos"]),
+  computed: mapGetters(['allTodos']),
   methods: {
-    ...mapActions(["fetchTodos"]),
-    deleteTodo(id) {
-      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(() => this.todos = this.todos.filter(todo => todo.id !== id))
-      .catch(err => console.log(err))
-    },
-    addTodo(newTodo) {
-      const { title, completed } = newTodo;
-      axios.post('https://jsonplaceholder.typicode.com/todos', { title, completed})
-      .then(res => this.todos = [...this.todos, res.data])
-      .catch(err => console.log(err))
-    }
+    ...mapActions(['fetchTodos', 'deleteTodo']),
   },
   created() {
     this.fetchTodos()
-    .then(() => this.todos = this.allTodos)
   }
 }
 </script>
