@@ -1,8 +1,15 @@
 <template>
   <div class='todos'>
-    <div v-for="todo in todos" v-bind:key='todo.id'>
-      <TodoItem v-bind:todo='todo' v-on:del-todo="$emit('del-todo', todo.id)"/>
-    </div>
+    <v-layout wrap>
+      <v-flex xs4
+        v-for="todo in todos"
+        v-bind:key='todo.id'
+        mb-2>
+        <v-card>
+          <TodoItem v-bind:todo='todo' v-on:del-todo="$emit('del-todo', todo.id)"/>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
 
