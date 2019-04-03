@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import Todos from '../components/Todos'
 import AddTodo from '../components/AddTodo'
 import { mapGetters, mapActions } from "vuex";
