@@ -10,6 +10,7 @@ import axios from 'axios'
 
 import Todos from '../components/Todos'
 import AddTodo from '../components/AddTodo'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: 'Home',
@@ -22,7 +23,9 @@ export default {
       todos: []
     }
   },
+  computed: mapGetters(["allTodos"]),
   methods: {
+    ...mapActions(["fetchTodos"]),
     deleteTodo(id) {
       axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then(() => this.todos = this.todos.filter(todo => todo.id !== id))
@@ -36,9 +39,8 @@ export default {
     }
   },
   created() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-    .then(res => this.todos = res.data)
-    .catch(err => console.log(err))
+    this.fetchTodos()
+    .then(() => this.todos = this.allTodos)
   }
 }
 </script>
