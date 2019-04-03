@@ -5,8 +5,10 @@ import router from './router'
 import store from './store'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import interceptorsSetup from './helpers/interceptors'
 
 Vue.config.productionTip = false
+interceptorsSetup()
 
 new Vue({
   router,

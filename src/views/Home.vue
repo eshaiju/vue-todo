@@ -26,7 +26,7 @@ export default {
     ...mapActions(['fetchTodos', 'deleteTodo']),
   },
   created() {
-    this.fetchTodos()
+    this.fetchTodos();
   }
 }
 </script>
